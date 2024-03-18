@@ -1,0 +1,78 @@
+<div class="container">
+  <h2>Coordinate Conversions</h2>
+
+  <!-- Form for DD to DM and DMS with Latitude and Longitude -->
+  <form #ddForm="ngForm" (ngSubmit)="convertDD()">
+    <div class="form-group">
+      <label for="ddLatitude">Latitude (Decimal Degrees)</label>
+      <input type="number" class="form-control" id="ddLatitude" [(ngModel)]="ddLatitude" name="ddLatitude" placeholder="Enter Latitude DD" required>
+    </div>
+    <div class="form-group">
+      <label for="ddLongitude">Longitude (Decimal Degrees)</label>
+      <input type="number" class="form-control" id="ddLongitude" [(ngModel)]="ddLongitude" name="ddLongitude" placeholder="Enter Longitude DD" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Convert from DD</button>
+  </form>
+
+  <hr>
+
+  <!-- Form for DM to DD and DMS with Latitude and Longitude -->
+  <form #dmForm="ngForm" (ngSubmit)="convertDM()">
+    <div class="row">
+      <div class="col">
+        <label>Latitude Degrees</label>
+        <input type="number" class="form-control" [(ngModel)]="dmLatDegrees" name="dmLatDegrees" placeholder="Degrees" required>
+      </div>
+      <div class="col">
+        <label>Latitude Minutes</label>
+        <input type="number" class="form-control" [(ngModel)]="dmLatMinutes" name="dmLatMinutes" placeholder="Decimal Minutes" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Longitude Degrees</label>
+        <input type="number" class="form-control" [(ngModel)]="dmLonDegrees" name="dmLonDegrees" placeholder="Degrees" required>
+      </div>
+      <div class="col">
+        <label>Longitude Minutes</label>
+        <input type="number" class="form-control" [(ngModel)]="dmLonMinutes" name="dmLonMinutes" placeholder="Decimal Minutes" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Convert from DM</button>
+  </form>
+
+  <hr>
+
+  <!-- Form for DMS to DD and DM with Latitude and Longitude -->
+  <form #dmsForm="ngForm" (ngSubmit)="convertDMS()">
+    <div class="row">
+      <div class="col">
+        <label>Latitude Degrees</label>
+        <input type="number" class="form-control" [(ngModel)]="dmsLatDegrees" name="dmsLatDegrees" placeholder="Degrees" required>
+      </div>
+      <div class="col">
+        <label>Latitude Minutes</label>
+        <input type="number" class="form-control" [(ngModel)]="dmsLatMinutes" name="dmsLatMinutes" placeholder="Minutes" required>
+      </div>
+      <div class="col">
+        <label>Latitude Seconds</label>
+        <input type="number" class="form-control" [(ngModel)]="dmsLatSeconds" name="dmsLatSeconds" placeholder="Seconds" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Longitude Degrees</label>
+        <input type="number" class="form-control" [(ngModel)]="dmsLonDegrees" name="dmsLonDegrees" placeholder="Degrees" required>
+      </div>
+      <div class="col">
+        <label>Longitude Minutes</label>
+        <input type="number" class="form-control" [(ngModel)]="dmsLonMinutes" name="dmsLonMinutes" placeholder="Minutes" required>
+      </div>
+      <div class="col">
+        <label>Longitude Seconds</label>
+        <input type="number" class="form-control" [(ngModel)]="dmsLonSeconds" name="dmsLonSeconds" placeholder="Seconds" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Convert from DMS</button>
+  </form>
+</div>
