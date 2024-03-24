@@ -1,0 +1,20 @@
+<div class="conversion-history">
+  <h2>Conversion History</h2>
+  <div *ngIf="history && history.length; else noHistory">
+    <ul class="history-list">
+      <li *ngFor="let entry of history">
+        <div class="history-entry">
+          <p class="conversion-type">{{entry.type}}</p>
+          <div class="conversion-detail">
+            <span class="input-value"><strong>Input:</strong> {{ formatConversion(entry.inputValues) }}</span>
+            <span class="arrow">→</span>
+            <span class="output-value"><strong>Output:</strong> {{ formatConversion(entry.outputValues) }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noHistory>
+    <p>No conversion history available.</p>
+  </ng-template>
+</div>
