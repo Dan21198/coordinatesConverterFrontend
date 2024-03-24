@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ConversionFormComponent } from "./components/conversion-form/conversion-form.component";
 import {FileUploadComponent} from "./components/file-upload/file-upload.component";
+import {ConversionHistoryComponent} from "./components/conversion-history/conversion-history.component";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import {FileUploadComponent} from "./components/file-upload/file-upload.componen
     RouterOutlet,
     ConversionFormComponent,
     HttpClientModule,
-    FileUploadComponent
+    FileUploadComponent,
+    ConversionHistoryComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

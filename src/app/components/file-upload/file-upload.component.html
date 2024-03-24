@@ -1,9 +1,14 @@
 <div class="body-content">
-  <div class="file-upload-container">
+  <div class="file-upload-container"
+       (dragover)="dragOverHandler($event)"
+       (dragleave)="dragLeaveHandler($event)"
+       (drop)="onFileDropped($event)"
+       [class.drag-over]="isDragging">
     <h2>File Upload</h2>
     <form class="form">
       <div class="form-group conversion-type-selector">
-        <mat-button-toggle-group name="conversionType" class="type-option" (change)="setConversionType($event.value)" aria-label="Conversion Type">
+        <mat-button-toggle-group name="conversionType" class="type-option" (change)="setConversionType($event.value)"
+                                 aria-label="Conversion Type">
           <mat-button-toggle value="dd-to-dms">DD to DMS</mat-button-toggle>
           <mat-button-toggle value="dm-to-dd">DM to DD</mat-button-toggle>
           <mat-button-toggle value="dms-to-dd">DMS to DD</mat-button-toggle>
@@ -15,6 +20,9 @@
         <label for="file" mat-raised-button>
           <mat-icon></mat-icon>Upload File
         </label>
+        <div class="drop-area">
+          <div class="drop-indicator">or Drop Here</div>
+        </div>
       </div>
     </form>
   </div>

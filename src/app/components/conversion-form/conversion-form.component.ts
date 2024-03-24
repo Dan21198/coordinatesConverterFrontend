@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import { DDCoordinates, DMSCoordinates, DMCoordinates } from '../../model/model';
-import {HttpClient} from "@angular/common/http";
+import {DDCoordinates, DMSCoordinates, DMCoordinates} from '../../model/model';
+import {ConversionHistoryService} from '../../services/conversion-history.service';
 import {ConversionService} from "../../services/apiService/conversion.service";
 
 @Component({
@@ -32,15 +32,22 @@ export class ConversionFormComponent {
   dmsLonMinutes: number = 0;
   dmsLonSeconds: number = 0;
 
-  constructor(private conversionService: ConversionService) { }
+  constructor(private conversionService: ConversionService,
+              private historyService: ConversionHistoryService) {
+  }
 
   convertDD() {
-    const ddCoordinates: DDCoordinates = { latitude: this.ddLatitude, longitude: this.ddLongitude };
+    const ddCoordinates: DDCoordinates = {latitude: this.ddLatitude, longitude: this.ddLongitude};
     this.conversionService.convertDDToDM(ddCoordinates).subscribe(response => {
       this.dmLatDegrees = response.latDegrees;
       this.dmLatMinutes = response.latMinutes;
       this.dmLonDegrees = response.lonDegrees;
       this.dmLonMinutes = response.lonMinutes;
+      this.historyService.addHistoryEntry({
+        type: 'DD to DM',
+        inputValues: ddCoordinates,
+        outputValues: response,
+      });
     });
     this.conversionService.convertDDToDMS(ddCoordinates).subscribe(response => {
       this.dmsLatDegrees = response.latDegrees;
@@ -49,6 +56,11 @@ export class ConversionFormComponent {
       this.dmsLonDegrees = response.lonDegrees;
       this.dmsLonMinutes = response.lonMinutes;
       this.dmsLonSeconds = response.lonSeconds;
+      this.historyService.addHistoryEntry({
+        type: 'DD to DMS',
+        inputValues: ddCoordinates,
+        outputValues: response,
+      });
     });
   }
 
@@ -60,6 +72,11 @@ export class ConversionFormComponent {
     this.conversionService.convertDMToDD(dmCoordinates).subscribe(response => {
       this.ddLatitude = response.latitude;
       this.ddLongitude = response.longitude;
+      this.historyService.addHistoryEntry({
+        type: 'DM to DD',
+        inputValues: dmCoordinates,
+        outputValues: response,
+      });
     });
     this.conversionService.convertDMToDMS(dmCoordinates).subscribe(response => {
       this.dmsLatDegrees = response.latDegrees;
@@ -68,6 +85,11 @@ export class ConversionFormComponent {
       this.dmsLonDegrees = response.lonDegrees;
       this.dmsLonMinutes = response.lonMinutes;
       this.dmsLonSeconds = response.lonSeconds;
+      this.historyService.addHistoryEntry({
+        type: 'DM to DMS',
+        inputValues: dmCoordinates,
+        outputValues: response,
+      });
     });
   }
 
@@ -79,12 +101,22 @@ export class ConversionFormComponent {
     this.conversionService.convertDMSToDD(dmsCoordinates).subscribe(response => {
       this.ddLatitude = response.latitude;
       this.ddLongitude = response.longitude;
+      this.historyService.addHistoryEntry({
+        type: 'DMS to DD',
+        inputValues: dmsCoordinates,
+        outputValues: response,
+      });
     });
     this.conversionService.convertDMSToDM(dmsCoordinates).subscribe(response => {
       this.dmLatDegrees = response.latDegrees;
       this.dmLatMinutes = response.latMinutes;
       this.dmLonDegrees = response.lonDegrees;
       this.dmLonMinutes = response.lonMinutes;
+      this.historyService.addHistoryEntry({
+        type: 'DMS to DM',
+        inputValues: dmsCoordinates,
+        outputValues: response,
+      });
     });
   }
 }

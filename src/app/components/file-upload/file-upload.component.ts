@@ -26,9 +26,9 @@ import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-to
 })
 export class FileUploadComponent {
   conversionType: string = '';
+  isDragging: boolean = false;
 
-  constructor(private conversionFileService: ConversionFileService) {
-  }
+  constructor(private conversionFileService: ConversionFileService) {}
 
   setConversionType(type: string) {
     this.conversionType = type;
@@ -37,21 +37,46 @@ export class FileUploadComponent {
   onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     const file: File | null = target.files ? target.files[0] : null;
-
-    if (file && this.conversionType) {
-      const fileType = this.getFileType(file);
-
-      if (fileType) {
-        this.conversionFileService.processFile(file, this.conversionType, fileType).subscribe(blob => {
-          this.downloadFile(blob, this.generateDownloadFileName(file.name, this.conversionType));
-        }, error => {
-          console.error('Error processing file:', error);
-          alert('Error processing file');
-        });
-      }
-    } else if (!this.conversionType) {
-      alert('Please select a conversion type before uploading a file.');
+    if (file) {
+      this.handleFile(file);
     }
+  }
+
+  dragOverHandler(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = true;
+  }
+
+  dragLeaveHandler(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = false;
+  }
+
+  onFileDropped(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = false;
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.handleFile(files[0]);
+    }
+  }
+
+  private handleFile(file: File) {
+    if (!this.conversionType) {
+      alert('Please select a conversion type before uploading a file.');
+      return;
+    }
+    const fileType = this.getFileType(file);
+    if (!fileType) {
+      alert('Unsupported file type');
+      return;
+    }
+    this.conversionFileService.processFile(file, this.conversionType, fileType).subscribe(blob => {
+      this.downloadFile(blob, this.generateDownloadFileName(file.name, this.conversionType));
+    }, error => {
+      console.error('Error processing file:', error);
+      alert('Error processing file');
+    });
   }
 
   private downloadFile(blob: Blob, fileName: string) {
@@ -67,19 +92,12 @@ export class FileUploadComponent {
     return `${originalFileName.split('.').shift()}-${conversionType}.${fileExtension}`;
   }
 
-  private getFileType(file: File) {
+  private getFileType(file: File): "excel" | "word" | "text" | "csv" | null {
     const fileName = file.name.toLowerCase();
-    if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) {
-      return 'excel';
-    } else if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
-      return 'word';
-    } else if (fileName.endsWith('.txt')) {
-      return 'text';
-    } else if (fileName.endsWith('.csv')) {
-      return 'csv';
-    } else {
-      alert('Unsupported file type');
-      return null;
-    }
+    if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) return "excel";
+    if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) return "word";
+    if (fileName.endsWith('.txt')) return "text";
+    if (fileName.endsWith('.csv')) return "csv";
+    return null;
   }
 }

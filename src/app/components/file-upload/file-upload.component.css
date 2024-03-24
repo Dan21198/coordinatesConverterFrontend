@@ -12,6 +12,7 @@ body {
 }
 
 .file-upload-container {
+  position: relative;
   width: 1000px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -69,4 +70,40 @@ label[for="file"]:hover {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.drag-drop-area.dragging {
+  background-color: #e1f5fe;
+  border: 2px dashed #29b6f6;
+}
+
+
+.drop-indicator {
+  font-size: 1rem;
+  color: #007bff;
+  padding: 20px;
+  border-radius: 4px;
+  transition: opacity 0.3s ease;
+}
+
+
+.file-upload-container.drag-over .drop-indicator {
+  display: flex;
+  opacity: 1;
+}
+
+.file-upload-container.drag-over .drop-area {
+  border-color: #007bff;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  margin-top: 20px;
+  padding: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  transition: border-color 0.3s ease;
 }

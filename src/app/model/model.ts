@@ -18,3 +18,9 @@ export interface DMSCoordinates {
   lonMinutes: number;
   lonSeconds: number;
 }
+
+export interface ConversionHistoryEntry {
+  type: string;
+  inputValues: any;
+  outputValues: any;
+}
