@@ -7,7 +7,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   margin: 0;
 }
 
@@ -85,7 +84,6 @@ label[for="file"]:hover {
   border-radius: 4px;
   transition: opacity 0.3s ease;
 }
-
 
 .file-upload-container.drag-over .drop-indicator {
   display: flex;

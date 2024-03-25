@@ -5,7 +5,6 @@
 
 .container {
   max-width: 600px;
-  margin-top: 20px;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -32,7 +31,7 @@ h2 {
 
 .input-group {
   display: flex;
-  position: relative; /* For absolute positioning of the degree-label */
+  position: relative;
 }
 
 .form-control {
@@ -40,7 +39,7 @@ h2 {
   font-size: 0.9rem;
   border-radius: 4px;
   border: 1px solid #ccc;
-  flex-grow: 1; /* Ensure input takes available space */
+  flex-grow: 1;
 }
 
 .degree-label {
@@ -52,7 +51,7 @@ h2 {
   border: 1px solid #ccc;
   border-left: 0;
   pointer-events: none;
-  height: calc(100% - 2px); /* Full height minus border */
+  height: calc(100% - 2px);
   display: flex;
   align-items: center;
 }
@@ -66,8 +65,8 @@ h2 {
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.2s;
-  display: block; /* Ensure it behaves as a block-level element */
-  width: 100%; /* Full width for block display */
+  display: block;
+  width: 100%;
   margin-top: 10px;
 }
 
@@ -75,7 +74,6 @@ h2 {
   background-color: #0056b3;
 }
 
-/* Divider Styling */
 hr {
   border: none;
   height: 1px;
@@ -83,7 +81,6 @@ hr {
   margin: 20px 0;
 }
 
-/* Remove input number spinners */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
