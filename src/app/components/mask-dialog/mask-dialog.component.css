@@ -1,0 +1,42 @@
+mat-dialog-title {
+  color: #1976d2;
+  font-size: 24px;
+  text-align: center;
+}
+
+mat-dialog-content {
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-grow: 0;
+}
+
+.mat-dialog-actions button {
+  height: 48px;
+  max-height: 100%;
+}
+
+button[mat-button] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+button[mat-button]:hover, button[mat-button]:focus {
+  background-color: #0056b3;
+}
+

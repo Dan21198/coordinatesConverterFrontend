@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Set Mask</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Mask</mat-label>
+    <input matInput [(ngModel)]="mask">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-button [mat-dialog-close]="mask">Apply</button>
+</mat-dialog-actions>

@@ -21,6 +21,7 @@ export interface DMSCoordinates {
 
 export interface ConversionHistoryEntry {
   type: string;
-  inputValues: any;
-  outputValues: any;
+  inputValues: object;
+  outputValues: object;
+  outputMask?: string;
 }

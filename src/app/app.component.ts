@@ -13,7 +13,7 @@ import {ConversionHistoryComponent} from "./components/conversion-history/conver
     ConversionFormComponent,
     HttpClientModule,
     FileUploadComponent,
-    ConversionHistoryComponent
+    ConversionHistoryComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
