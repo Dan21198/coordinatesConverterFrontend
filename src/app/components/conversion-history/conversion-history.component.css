@@ -73,5 +73,17 @@ pre {
 
 .btn-block {
   width: auto;
+  color: white;
   margin-right: 0;
 }
+
+.title-and-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button[mat-button]:hover, button[mat-button]:focus {
+  background-color: #0056b3;
+}
+

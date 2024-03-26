@@ -1,6 +1,6 @@
 <div class="conversion-history">
-  <h2>Conversion History</h2>
-  <div class="button-container">
+  <div class="title-and-button-container">
+    <h2>Conversion History</h2>
     <button mat-button class="btn-block" (click)="openMaskDialog()">Edit Mask</button>
   </div>
   <div *ngIf="history && history.length; else noHistory">
