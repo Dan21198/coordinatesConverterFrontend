@@ -2,77 +2,107 @@
   <div class="container">
     <h2>Coordinate Conversions</h2>
 
-    <!-- Form for Decimal Degree (DD) -->
-    <div class="form-group">
-      <label for="ddLatitude">Latitude</label>
-      <div class="input-group">
-        <input type="text" class="form-control" id="ddLatitude" [(ngModel)]="ddLatitude" name="ddLatitude" placeholder="0.0" required>
-        <div class="input-group-append">
-          <span class="input-group-text">(N)</span>
+      <div class="form-group">
+        <label for="ddLatitude">Latitude</label>
+        <div class="input-group">
+          <input type="number" class="form-control" id="ddLatitude" [(ngModel)]="ddLatitude" name="ddLatitude"
+                 placeholder="0.0" required min="-90" max="90" #ddLat="ngModel">
+          <div *ngIf="ddLat.errors" class="alert alert-danger">
+            <div *ngIf="ddLat.errors['required']">Latitude is required.</div>
+            <div *ngIf="ddLat.errors['min'] || ddLat.errors['max']">Latitude must be between -90 and 90.</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="ddLongitude">Longitude</label>
-      <div class="input-group">
-        <input type="text" class="form-control" id="ddLongitude" [(ngModel)]="ddLongitude" name="ddLongitude" placeholder="0.0" required>
-        <div class="input-group-append">
-          <span class="input-group-text">(E)</span>
+      <div class="form-group">
+        <label for="ddLongitude">Longitude</label>
+        <div class="input-group">
+          <input type="number" class="form-control" id="ddLongitude" [(ngModel)]="ddLongitude" name="ddLongitude"
+                 placeholder="0.0" required min="-180" max="180" #ddLon="ngModel">
+          <div *ngIf="ddLon.errors" class="alert alert-danger">
+            <div *ngIf="ddLon.errors['required']">Longitude is required.</div>
+            <div *ngIf="ddLon.errors['min'] || ddLon.errors['max']">Longitude must be between -180 and 180.</div>
+          </div>
         </div>
       </div>
-    </div>
-    <button type="button" class="btn btn-warning btn-block" (click)="convertDD()">Convert from DD</button>
+    <button type="button" class="btn btn-warning btn-block" [disabled]="!ddLat.valid
+     || !ddLon.valid" (click)="convertDD()">Convert From DD</button>
 
     <hr>
 
-    <!-- Form for Degrees Minutes (DM) -->
     <div class="form-group">
       <label>Latitude</label>
       <div class="input-group">
-        <input type="text" class="form-control" [(ngModel)]="dmLatDegrees" name="dmLatDegrees" placeholder="0" required>
-        <input type="text" class="form-control" [(ngModel)]="dmLatMinutes" name="dmLatMinutes" placeholder="0.0" required>
-        <div class="input-group-append">
-          <span class="input-group-text">(N)</span>
-        </div>
+        <input type="number" class="form-control" [(ngModel)]="dmLatDegrees" name="dmLatDegrees"
+               placeholder="0" required min="-90" max="90" #dmLatDeg="ngModel">
+        <input type="number" class="form-control" [(ngModel)]="dmLatMinutes" name="dmLatMinutes"
+               placeholder="0.0" required min="0" max="60" #dmLatMin="ngModel">
+      </div>
+      <div *ngIf="dmLatDeg.errors || dmLatMin.errors" class="alert alert-danger">
+        <div *ngIf="dmLatDeg.errors?.['required']
+        || dmLatMin.errors?.['required']">Latitude degrees and minutes are required.</div>
+        <div *ngIf="dmLatDeg.errors?.['min'] || dmLatDeg.errors?.['max'] || dmLatMin.errors?.['min']
+        || dmLatMin.errors?.['max']">Latitude degrees must be between -90 and 90, minutes between 0 and 60.</div>
       </div>
     </div>
     <div class="form-group">
       <label>Longitude</label>
       <div class="input-group">
-        <input type="text" class="form-control" [(ngModel)]="dmLonDegrees" name="dmLonDegrees" placeholder="0" required>
-        <input type="text" class="form-control" [(ngModel)]="dmLonMinutes" name="dmLonMinutes" placeholder="0.0" required>
-        <div class="input-group-append">
-          <span class="input-group-text">(E)</span>
-        </div>
+        <input type="number" class="form-control" [(ngModel)]="dmLonDegrees" name="dmLonDegrees"
+               placeholder="0" required min="-180" max="180" #dmLonDeg="ngModel">
+        <input type="number" class="form-control" [(ngModel)]="dmLonMinutes" name="dmLonMinutes"
+               placeholder="0.0" required min="0" max="60" #dmLonMin="ngModel">
+      </div>
+      <div *ngIf="dmLonDeg.errors || dmLonMin.errors" class="alert alert-danger">
+        <div *ngIf="dmLonDeg.errors?.['required']
+        || dmLonMin.errors?.['required']">Longitude degrees and minutes are required.</div>
+        <div *ngIf="dmLonDeg.errors?.['min'] || dmLonDeg.errors?.['max'] || dmLonMin.errors?.['min']
+        || dmLonMin.errors?.['max']">Longitude degrees must be between -180 and 180, minutes between 0 and 60.</div>
       </div>
     </div>
-    <button type="button" class="btn btn-warning btn-block" (click)="convertDM()">Convert from DM</button>
+    <button type="button" class="btn btn-warning btn-block" [disabled]="!dmLatDeg.valid || !dmLatMin.valid
+     || !dmLonDeg.valid || !dmLonMin.valid" (click)="convertDM()">Convert from DM</button>
+
 
     <hr>
 
-    <!-- Form for Degrees Minutes Seconds (DMS) -->
     <div class="form-group">
       <label>Latitude</label>
       <div class="input-group">
-        <input type="text" class="form-control" [(ngModel)]="dmsLatDegrees" name="dmsLatDegrees" placeholder="0" required>
-        <input type="text" class="form-control" [(ngModel)]="dmsLatMinutes" name="dmsLatMinutes" placeholder="0" required>
-        <input type="text" class="form-control" [(ngModel)]="dmsLatSeconds" name="dmsLatSeconds" placeholder="0.0" required>
-        <div class="input-group-append">
-          <span class="input-group-text">(N)</span>
-        </div>
+        <input type="number" class="form-control" [(ngModel)]="dmsLatDegrees" name="dmsLatDegrees"
+               placeholder="0" required min="-90" max="90" #dmsLatDeg="ngModel">
+        <input type="number" class="form-control" [(ngModel)]="dmsLatMinutes" name="dmsLatMinutes"
+               placeholder="0" required min="0" max="60" #dmsLatMin="ngModel">
+        <input type="number" class="form-control" [(ngModel)]="dmsLatSeconds" name="dmsLatSeconds"
+               placeholder="0.0" required min="0" max="60" #dmsLatSec="ngModel">
+      </div>
+      <div *ngIf="dmsLatDeg.errors || dmsLatMin.errors || dmsLatSec.errors" class="alert alert-danger">
+        <div *ngIf="dmsLatDeg.errors?.['required'] || dmsLatMin.errors?.['required']
+         || dmsLatSec.errors?.['required']">Latitude degrees, minutes and seconds are required.</div>
+        <div *ngIf="dmsLatDeg.errors?.['min'] || dmsLatDeg.errors?.['max']
+        || dmsLatMin.errors?.['min'] || dmsLatMin.errors?.['max'] || dmsLatSec.errors?.['min']
+        || dmsLatSec.errors?.['max']">Latitude degrees must be between -90 and 90, minutes and seconds between 0 and 60.</div>
       </div>
     </div>
     <div class="form-group">
       <label>Longitude</label>
       <div class="input-group">
-        <input type="text" class="form-control" [(ngModel)]="dmsLonDegrees" name="dmsLonDegrees" placeholder="0" required>
-        <input type="text" class="form-control" [(ngModel)]="dmsLonMinutes" name="dmsLonMinutes" placeholder="0" required>
-        <input type="text" class="form-control" [(ngModel)]="dmsLonSeconds" name="dmsLonSeconds" placeholder="0.0" required>
-        <div class="input-group-append">
-          <span class="input-group-text">(E)</span>
-        </div>
+        <input type="number" class="form-control" [(ngModel)]="dmsLonDegrees" name="dmsLonDegrees"
+               placeholder="0" required min="-180" max="180" #dmsLonDeg="ngModel">
+        <input type="number" class="form-control" [(ngModel)]="dmsLonMinutes" name="dmsLonMinutes"
+               placeholder="0" required min="0" max="60" #dmsLonMin="ngModel">
+        <input type="number" class="form-control" [(ngModel)]="dmsLonSeconds" name="dmsLonSeconds"
+               placeholder="0.0" required min="0" max="60" #dmsLonSec="ngModel">
+      </div>
+      <div *ngIf="dmsLonDeg.errors || dmsLonMin.errors || dmsLonSec.errors" class="alert alert-danger">
+        <div *ngIf="dmsLonDeg.errors?.['required'] || dmsLonMin.errors?.['required']
+         || dmsLonSec.errors?.['required']">Longitude degrees, minutes and seconds are required.</div>
+        <div *ngIf="dmsLonDeg.errors?.['min'] || dmsLonDeg.errors?.['max'] || dmsLonMin.errors?.['min']
+         || dmsLonMin.errors?.['max'] || dmsLonSec.errors?.['min']
+          || dmsLonSec.errors?.['max']">Longitude degrees must be between -180 and 180, minutes and seconds between 0 and 60.</div>
       </div>
     </div>
-    <button type="button" class="btn btn-warning btn-block" (click)="convertDMS()">Convert from DMS</button>
+    <button type="button" class="btn btn-warning btn-block" [disabled]="!dmsLatDeg.valid || !dmsLatMin.valid
+    || !dmsLatSec.valid || !dmsLonDeg.valid || !dmsLonMin.valid
+     || !dmsLonSec.valid" (click)="convertDMS()">Convert from DMS</button>
   </div>
 </div>

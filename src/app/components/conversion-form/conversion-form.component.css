@@ -4,6 +4,8 @@
 }
 
 .container {
+  width: 600px;
+  margin: auto;
   max-width: 600px;
   padding: 20px;
   background-color: #fff;
@@ -89,4 +91,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
 }

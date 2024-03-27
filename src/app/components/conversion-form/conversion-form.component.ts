@@ -1,14 +1,17 @@
 import {Component} from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, NgForm} from "@angular/forms";
 import {DDCoordinates, DMSCoordinates, DMCoordinates} from '../../model/model';
 import {ConversionHistoryService} from '../../services/conversion-history.service';
 import {ConversionService} from "../../services/apiService/conversion.service";
+import {CommonModule, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-conversion-form',
   standalone: true,
   imports: [
-    FormsModule
+    CommonModule,
+    FormsModule,
+    NgIf
   ],
   templateUrl: './conversion-form.component.html',
   styleUrl: './conversion-form.component.css'
@@ -38,6 +41,7 @@ export class ConversionFormComponent {
 
   convertDD() {
     const ddCoordinates: DDCoordinates = {latitude: this.ddLatitude, longitude: this.ddLongitude};
+
     this.conversionService.convertDDToDM(ddCoordinates).subscribe(response => {
       this.dmLatDegrees = response.latDegrees;
       this.dmLatMinutes = response.latMinutes;

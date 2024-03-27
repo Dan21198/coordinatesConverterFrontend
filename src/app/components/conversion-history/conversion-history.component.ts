@@ -32,15 +32,12 @@ export class ConversionHistoryComponent {
       .join(', ');
   }
 
-  formatWithMask(outputValues: DDCoordinates | DMCoordinates | DMSCoordinates, mask?: string): string {
-    console.log('Mask before formatting:', mask);
-    console.log('Output values:', outputValues);
-
+  formatWithMask(outputValues: object, mask?: string | undefined): string {
     let formatted = mask || this.mask;
 
     type CoordinateValues = DDCoordinates | DMCoordinates | DMSCoordinates;
 
-    const formatLatLon = (values: CoordinateValues, format: 'DD' | 'DM' | 'DMS') => {
+    const formatLatLon = (values: object, format: "DD" | "DM" | "DMS") => {
       switch (format) {
         case 'DM':
           const dmValues = values as DMCoordinates;
