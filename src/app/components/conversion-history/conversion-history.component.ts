@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ConversionHistoryEntry, DDCoordinates, DMCoordinates, DMSCoordinates} from "../../model/model";
-import {ConversionHistoryService} from "../../services/conversion-history.service";
+import {ConversionHistoryService} from "../../services/historyService/conversion-history.service";
 import {CommonModule, JsonPipe} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
 import {MaskDialogComponent} from "../mask-dialog/mask-dialog.component";

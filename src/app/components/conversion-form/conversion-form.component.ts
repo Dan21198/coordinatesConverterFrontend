@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormsModule, NgForm} from "@angular/forms";
 import {DDCoordinates, DMSCoordinates, DMCoordinates} from '../../model/model';
-import {ConversionHistoryService} from '../../services/conversion-history.service';
+import {ConversionHistoryService} from '../../services/historyService/conversion-history.service';
 import {ConversionService} from "../../services/apiService/conversion.service";
 import {CommonModule, NgIf} from "@angular/common";
 

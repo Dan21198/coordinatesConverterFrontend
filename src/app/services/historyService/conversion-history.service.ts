@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ConversionHistoryEntry} from "../model/model";
+import {ConversionHistoryEntry} from "../../model/model";
 
 @Injectable({
   providedIn: 'root'
